@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title>Social Catwork</title>
+	    <link rel="icon" href="/public/images/paw.png">
+	   	<link rel="stylesheet" href="/public/stylesheets/main.css">
+	    
+	</head>    
+	<body>
+	<div class="paw">
+		<img src="/public/images/paw.png" width="150px" height="150px"/>
+	</div>	
+	<div class="form">
+	
+	#{if error}
+	<div class="error-message">
+		${error}
+	</div>
+	#{/if}
+	<form action="@{Application.register}" method="POST" accept-charset="UTF-8">
+		<input type="email" name="catemail" placeholder="Please, enter your cat's email"/>
+		<input type="text" name="catname" placeholder="Please, enter your cat's name"/>
+		<input type="password" name="catpassword" placeholder="Please, enter your cat's password"/>
+		<input type="submit" value="Register"></input>
+		<a href="/login">I want to login</a>
+	</form>
+	</div>
+	</body>
+</html>

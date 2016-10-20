@@ -1,0 +1,28 @@
+.form {
+	width: 50%;
+	margin: 30px auto;
+}
+.paw {
+	width: 150px;
+	margin: 10px auto;
+}
+
+input {
+    width: 70%;
+    padding: 12px 20px;
+    margin: 8px 100px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+a {
+	width: 50%;
+	margin: 10px 100px;
+}
+
+.error-message {
+	width: 70%;
+	margin: 10px 100px;;
+}
+
+

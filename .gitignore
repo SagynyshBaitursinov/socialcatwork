@@ -1,0 +1,9 @@
+eclipse
+.settings
+.classpath
+.project
+catwork.iml
+catwork.ipr
+logs
+tmp
+test
