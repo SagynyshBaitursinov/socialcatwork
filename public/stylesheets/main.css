@@ -1,24 +1,31 @@
 .form {
 	width: 50%;
-	margin: 30px auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form form {
+    display: flex;
+    	flex-direction: column;
+    	justify-content: center;
+    	align-items: center;
 }
 .paw {
 	width: 150px;
-	margin: 10px auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 40px;
 }
 
 input {
     width: 70%;
     padding: 12px 20px;
-    margin: 8px 100px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    margin-bottom: 20px;
 }
-a {
-	width: 50%;
-	margin: 10px 100px;
-}
+
 
 .error-message {
 	width: 70%;

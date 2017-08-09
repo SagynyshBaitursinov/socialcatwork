@@ -7,3 +7,5 @@ catwork.ipr
 logs
 tmp
 test
+catwork.iws
+server.pid
