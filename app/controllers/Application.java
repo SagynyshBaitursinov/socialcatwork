@@ -1,19 +1,18 @@
 package controllers;
 
-import play.*;
+import dao.impl.CommentDaoJpa;
+import dao.interfaces.CommentDao;
 import play.mvc.*;
 
-import java.util.*;
-
-import dao.impl.CatDaoJDBC;
 import dao.impl.CatDaoJpa;
 import dao.interfaces.CatDao;
 import models.*;
 
 public class Application extends Controller {
 
-	public static CatDao catDao = new CatDaoJDBC(); 
-	
+	public static CatDao catDao = new CatDaoJpa();
+	public static CommentDao commentDao = new CommentDaoJpa();
+
     public static void loginPage() {
     	String error = flash.get("error");
         render(error);

@@ -2,15 +2,9 @@ package models;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import play.db.jpa.GenericModel;
 
@@ -31,6 +25,9 @@ public class PhotoEntity extends GenericModel {
 	
 	@Column(name="uploaded_date_")
 	private Date date;
+
+	@OneToMany(mappedBy="photo")
+	private List<CommentEntity> comments;
 	
 	@ManyToOne
 	@JoinColumn(name="cat_id_")
@@ -78,5 +75,13 @@ public class PhotoEntity extends GenericModel {
 	
 	public String getStringDate() {
 		return new SimpleDateFormat("dd-MM-yyyy hh:mm").format(this.date);
+	}
+
+	public List<CommentEntity> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentEntity> comments) {
+		this.comments = comments;
 	}
 }

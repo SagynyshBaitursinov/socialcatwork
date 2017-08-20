@@ -1,21 +1,67 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	    <meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-	    <title>Social Catwork</title>
-	    <link rel="icon" href="/public/images/paw.png">
-	</head>    
-	<body>
-	<h2>Hi, ${cat.getName()}!</h2>
-	<h4>Here are some recent cat photos:</h4>
-	<hr>
-	#{list items:allPhotos, as:'photo'}
-    <div>${photo.getCat().getName()} (${photo.getStringDate()}): <div style="font-weight: bold">${photo.getTitle()}</div><div><img src="@{PhotoController.getPhoto}?id=${photo.getId()}" height="100"/></div></div>
-	<hr>
-	#{/list}
-	<div><a href="/upload">Upload your own photo</a></div>
-	<div><a href="/logout">Logout</a></div>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Social Catwork</title>
+    <link rel="icon" href="/public/images/paw.png">
+    <link rel="stylesheet" type="text/css" href="/public/stylesheets/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/public/stylesheets/test.css">
+
+
+    <script src="https://use.fontawesome.com/a12d590683.js"></script>
+	<script src="/public/javascripts/jquery-1.6.4.min.js"></script>
+
+</head>
+<body>
+<header>
+	<div class="row">
+		<h2> ${cat.getName()}</h2>
+		<div class="options">
+			<i class="fa fa-caret-right fa-2x" aria-hidden="true"></i>
+			<a href="/upload"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a>
+			<a class="out" href="/logout"><i class="fa fa-sign-out fa-2x" aria-hidden="true"></i></a>
+        </div>
+	</div>
+</header>
+<!--<h4>Here are some recent cat photos:</h4>-->
+
+<script>
+    $( ".fa-caret-right" ).click(function() {
+        //alert($( this ).css( "transform" ));
+        if (  $( this ).css( "transform" ) == 'none' ){
+            $(this).css("transform","rotate(90deg)");
+        } else {
+            $(this).css("transform","" );
+        }
+    });
+</script>
+
+<div id="offset"></div>
+
+#{list items:allPhotos, as:'photo'}
+<div class="list">
+
+    <p class="upper">
+        <span class="title" style="float:left">${photo.getTitle()}</span>
+        <span class="date" style="float:right"> (${photo.getStringDate()}):</span>
+    </p>
+
+
+    <div><img src="@{PhotoController.getPhoto}?id=${photo.getId()}"/></div>
+    <div class="com">
+        <p class="comment">Insert your comment here...</p>
+    </div>
+
+</div>
+
+#{/list}
+
+<h1>Comments</h1>
+#{list items:allComments, as:'comment'}
+    <h3>${comment.getComment()}</h3>
+#{/list}
+
+</body>
 </html>

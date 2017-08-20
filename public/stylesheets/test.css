@@ -1,0 +1,157 @@
+<link href="https://fonts.googleapis.com/css?family=Alegreya+SC" rel="stylesheet">
+
+
+
+ html{
+	 height: 100%;
+	 width: 100%;
+ }
+.list {
+	vertical-align: text-top;
+	width: 41%;
+	height: 50%;
+	justify-content: center;
+	text-align: left;
+	flex-wrap: wrap;
+	padding-top: 0;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 10.13%;
+	background-color: white;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+img{
+	display: block;
+	width: 100%;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+.upper{
+	font-size: 15px;
+	color: #404349;
+	width: 50%;
+	float: left;
+	width:100%;
+
+}
+
+
+.title {
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 20px;
+	color: #404349;
+	padding-left: 10px;
+	text-transform: uppercase;
+}
+
+.date{
+	font-family: 'Alegreya SC', serif;
+	size: 36px;
+	color: #404349;
+	padding-right: 10px;
+}
+.comment{
+	font-family: 'Alegreya SC', serif;
+	size: 16px;
+	color: #fff;
+}
+body{
+	font-size: 12px;
+	color: #fff0f5;
+	background-color: #404349;
+}
+header{
+	border:1px solid #CCC;
+	width: 100%;
+	height: 100px;
+	font-size: 25px;
+	font-family: 'Alegreya SC', serif;
+	font-weight: normal;
+	color: #404349;
+	text-transform: uppercase;
+	background-color: #fff;
+	background-size: 100% auto;
+	position:fixed;
+	top:0px;
+	margin: auto;
+}
+
+
+h2, h4{
+	font-family: 'Alegreya SC', serif;
+	padding-left: 4.5%;
+}
+
+.row{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+/*div.row h2{*/
+	/*width: 70%;*/
+/*}*/
+
+/*div.row icon{*/
+	/*width: 30%;*/
+/*}*/
+
+.options{
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.fa-caret-right{
+	color: black;
+	margin-right: 10px;
+	margin-top: auto;
+	margin-bottom: auto;
+	/*font-size: 3em;*/
+}
+
+.fa-caret-right {
+	-webkit-transition-duration: 1s;
+	-moz-transition-duration: 1s;
+	-o-transition-duration: 1s;
+	transition-duration: 1s;
+	-webkit-transition-property: -webkit-transform;
+	-moz-transition-property: -moz-transform;
+	-o-transition-property: -o-transform;
+	transition-property: transform;
+}
+
+.fa-plus{
+	color: black;
+	margin-right: 10px;
+	margin-top: auto;
+	margin-bottom: auto;
+	/*font-size: 3em;*/
+}
+
+.fa-sign-out{
+	color: black;
+	margin-right: 20px;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+h4{
+	font-weight: normal;
+	font-size: 20px;
+	margin-left: 2%;
+
+}
+.com{
+	height: 29px;
+	color: #404349;
+}
+
+#offset{
+	margin-top: 200px;
+}
+
