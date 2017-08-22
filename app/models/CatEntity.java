@@ -31,17 +31,12 @@ public class CatEntity {
 	@OneToMany(mappedBy="cat")
 	private List<PhotoEntity> photos;
 	
-	public CatEntity() {
-		//
+	public CatEntity(String email, String name, String password) {
+		this.email = email;
+		this.name = name;
+		this.password = password;
 	}
-	
-	public CatEntity(Cat cat) {
-		this.id = cat.getId();
-		this.email = cat.getEmail();
-		this.password = cat.getPassword();
-		this.name = cat.getName();
-	}
-	
+
 	public List<PhotoEntity> getPhotos() {
 		return photos;
 	}

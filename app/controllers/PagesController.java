@@ -2,12 +2,7 @@ package controllers;
 
 import java.util.List;
 
-import dao.impl.CatDaoJpa;
-import dao.interfaces.CatDao;
-import models.Cat;
-import models.Comment;
-import models.CommentEntity;
-import models.PhotoEntity;
+import models.*;
 import play.mvc.Before;
 import play.mvc.Controller;
 
@@ -19,24 +14,26 @@ public class PagesController extends Controller {
     		Application.loginPage();
     	}
 	}
-	
+
     public static void mainPage() {
-		Cat cat = Application.catDao.getCatById(session.get("id"));
-		Comment comment = Application.commentDao.getCommentByCat(session.get("id"));
+		CatEntity cat = Application.catDao.getCatById(session.get("id"));
 		if (cat == null) {
 			session.clear();
 			Application.loginPage();
 		}
-		List<PhotoEntity> allPhotos = PhotoEntity.find("order by date desc").fetch();
-		List<CommentEntity> allComments = CommentEntity.find("order by id").fetch();
-		render(cat, allPhotos);
-		render(comment, allComments);
-		render();
+		List<PhotoEntity> allPhotoEntities = PhotoEntity.find("cat_id_ = " + cat.getId() + " order by date desc").fetch();
+
+		for (PhotoEntity photoEntity : allPhotoEntities) {
+            List<CommentEntity> comments = Application.commentDao.getCommentsByPhotoId(photoEntity.getId().toString());
+            photoEntity.setComments(comments);
+        }
+
+		render(cat, allPhotoEntities);
     }
-    
+
     public static void all() {
-    	List<Cat> cats = Application.catDao.getAllCats();
-    	List<Comment> comments = Application.commentDao.getAllComments();
+    	List<CatEntity> cats = Application.catDao.getAllCats();
+    	List<CommentEntity> comments = Application.commentDao.getAllComments();
     	renderJSON(cats);
     	renderJSON(comments);
     }
@@ -44,9 +41,7 @@ public class PagesController extends Controller {
     public static void uploadsPage() {
     	String error = flash.get("error");
     	String success = flash.get("success");
-    	Cat cat = Application.catDao.getCatById(session.get("id"));
-    	Comment comment = Application.commentDao.getCommentByCat(session.get("id"));
-    	render(cat, error, success);
-    	render(comment, error, success);
+    	CatEntity cat = Application.catDao.getCatById(session.get("id"));
+		render(cat, error, success);
     }
 }

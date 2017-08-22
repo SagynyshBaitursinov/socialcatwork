@@ -2,15 +2,15 @@ package dao.interfaces;
 
 import java.util.List;
 
-import models.Cat;
+import models.CatEntity;
 
 public interface CatDao {
 
-	public boolean saveCat(Cat cat) throws Exception;
+	public boolean saveCat(CatEntity cat) throws Exception;
 	
-	public Cat getCatById(String id);
+	public CatEntity getCatById(String id);
 	
-	public Cat getCatByEmail(String email);
+	public CatEntity getCatByEmail(String email);
 
-	public List<Cat> getAllCats();
+	public List<CatEntity> getAllCats();
 }

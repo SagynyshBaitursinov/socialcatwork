@@ -3,13 +3,9 @@ package controllers;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
-import dao.impl.CatDaoJpa;
-import dao.interfaces.CatDao;
-import models.Cat;
 import models.CatEntity;
 import models.PhotoEntity;
 import play.Logger;
@@ -31,7 +27,7 @@ public class PhotoController extends Controller {
     		flash.put("error", "Photo cannot be empty");
     		PagesController.uploadsPage();
     	}
-    	Cat cat = Application.catDao.getCatById(session.get("id"));
+    	CatEntity cat = Application.catDao.getCatById(session.get("id"));
     	String title = request.params.get("title");
     	if (title == null || title.isEmpty()) {
     		title = "Empty";
@@ -40,7 +36,7 @@ public class PhotoController extends Controller {
     	photoEntity.setTitle(title);
     	photoEntity.setDate(new Date());
     	photoEntity.setName(photo.getName());
-    	photoEntity.setCat(new CatEntity(cat));
+    	photoEntity.setCat(cat);
     	photoEntity.save();
         String destFolder = Play.configuration.getProperty("file.upload.path");
         String destFile = destFolder + File.separator + photoEntity.getId() + photo.getName();
@@ -54,7 +50,7 @@ public class PhotoController extends Controller {
     }
     
     public static void uploadsPage() {
-    	Cat cat = Application.catDao.getCatById(session.get("id"));
+    	CatEntity cat = Application.catDao.getCatById(session.get("id"));
     	render(cat);
     }
     
@@ -62,6 +58,10 @@ public class PhotoController extends Controller {
     	PhotoEntity photo = PhotoEntity.findById(id);
         String destFolder = Play.configuration.getProperty("file.upload.path");
         String destFile = destFolder + File.separator + photo.getId() + photo.getName();
-    	renderBinary(new File(destFile));
+        File file = new File(destFile);
+        if (file.exists()) {
+        	renderBinary(new File(destFile));
+		}
+		renderText("error");
     }
 }

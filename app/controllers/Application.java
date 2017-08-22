@@ -23,7 +23,7 @@ public class Application extends Controller {
     		flash.put("error", "Your password and email don't match");
     		loginPage();
     	}
-    	Cat cat = catDao.getCatByEmail(catemail);
+    	CatEntity cat = catDao.getCatByEmail(catemail);
     	if (cat == null) {
     		flash.put("error", "Your cat is not registered");
     		loginPage();
@@ -52,7 +52,7 @@ public class Application extends Controller {
     		registrationPage();
     	}
     	try {
-			if (catDao.saveCat(new Cat(catemail, catname, catpassword))) {
+			if (catDao.saveCat(new CatEntity(catemail, catname, catpassword))) {
 				loginPage();
 			} else {
 	    		flash.put("error", "Your cat is already registered here with its email");
@@ -64,7 +64,22 @@ public class Application extends Controller {
 		}
     	loginPage();
     }
-    
+
+    public static void saveComment(String comment, String photo) {
+		CatEntity cat = catDao.getCatById(session.get("id"));
+		CommentEntity commentEntity = new CommentEntity();
+		commentEntity.setComment(comment);
+		commentEntity.setCat(cat.getId());
+		commentEntity.setPhoto(Long.parseLong(photo));
+		commentEntity.save();
+		try {
+			commentDao.saveComment(commentEntity);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		PagesController.mainPage();
+	}
+
     public static void logout() {
     	session.clear();
     	loginPage();

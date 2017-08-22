@@ -3,8 +3,6 @@ package models;
 import play.db.jpa.GenericModel;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 @Entity
 @Table(name = "comments")
@@ -25,15 +23,13 @@ public class CommentEntity extends GenericModel {
 	private Long photo;
 
 	public CommentEntity() {
-
-		//
 	}
 
-	public CommentEntity(Comment comments) {
-		this.id = comments.getId();
-		this.comment = comments.getComment();
-		this.cat = comments.getCat_id();
-		this.photo = comments.getPhoto_id();
+	public CommentEntity(Long id, String comment, Long cat, Long photo) {
+		this.id = id;
+		this.comment = comment;
+		this.cat = cat;
+		this.photo = photo;
 	}
 
 
@@ -67,5 +63,10 @@ public class CommentEntity extends GenericModel {
 
 	public void setPhoto(Long photo) {
 		this.photo = photo;
+	}
+
+	@Override
+	public String toString(){
+		return id + " " + comment + " " + cat + " " + photo + "\n";
 	}
 }

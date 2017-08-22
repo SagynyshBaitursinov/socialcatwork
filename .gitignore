@@ -10,3 +10,4 @@ test
 catwork.iws
 server.pid
 *.DS_Store
+.idea

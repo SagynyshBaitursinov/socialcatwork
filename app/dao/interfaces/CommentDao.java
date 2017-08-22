@@ -1,17 +1,16 @@
 package dao.interfaces;
 
-import models.Cat;
-import models.Comment;
+import models.CommentEntity;
 
 import java.util.List;
 
 public interface CommentDao {
 
-	public boolean saveComment(Comment comment) throws Exception;
+	public boolean saveComment(CommentEntity comment) throws Exception;
 	
-	public Comment getCommentByCat(String id);
-	
-	public Comment getCommentByPhoto(String email);
+	public List<CommentEntity> getCommentByCat(String id);
 
-	public List<Comment> getAllComments();
+	public List<CommentEntity> getCommentsByPhotoId(String id);
+
+	public List<CommentEntity> getAllComments();
 }

@@ -28,7 +28,7 @@ public class PhotoEntity extends GenericModel {
 
 	@OneToMany(mappedBy="photo")
 	private List<CommentEntity> comments;
-	
+
 	@ManyToOne
 	@JoinColumn(name="cat_id_")
 	private CatEntity cat;

@@ -40,7 +40,7 @@
 
 <div id="offset"></div>
 
-#{list items:allPhotos, as:'photo'}
+#{list items:allPhotoEntities, as:'photo'}
 <div class="list">
 
     <p class="upper">
@@ -54,13 +54,17 @@
         <p class="comment">Insert your comment here...</p>
     </div>
 
+    <form action="@{Application.saveComment}?photo=${photo.getId()}" method="POST" accept-charset="UTF-8">
+        <input type="text" name="comment" placeholder="Your comment"/> <br/>
+        <input type="submit" value="Comment">
+    </form>
+
+    #{list items:photo.getComments(), as:'comment'}
+        <p style="color:blue;"> ${comment.getComment()} </p>
+    #{/list}
+
 </div>
 
-#{/list}
-
-<h1>Comments</h1>
-#{list items:allComments, as:'comment'}
-    <h3>${comment.getComment()}</h3>
 #{/list}
 
 </body>
