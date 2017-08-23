@@ -50,7 +50,7 @@
 
 
     <div>
-        <img src="@{PhotoController.getPhoto}?id=${photo.getId()}"/>
+        <img id="cat_img" src="@{PhotoController.getPhoto}?id=${photo.getId()}"/>
 
         <div class="com">
             <form class="comment" action="@{Application.saveComment}?photo=${photo.getId()}" method="POST" accept-charset="UTF-8">
