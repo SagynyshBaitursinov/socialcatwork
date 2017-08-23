@@ -65,19 +65,14 @@ public class Application extends Controller {
     	loginPage();
     }
 
-    public static void saveComment(String comment, String photo) {
+    public static void saveComment(String comment, Long photo) {
 		CatEntity cat = catDao.getCatById(session.get("id"));
 		CommentEntity commentEntity = new CommentEntity();
 		commentEntity.setComment(comment);
 		commentEntity.setCat(cat.getId());
-		commentEntity.setPhoto(Long.parseLong(photo));
+		commentEntity.setPhoto(photo);
 		commentEntity.save();
-		try {
-			commentDao.saveComment(commentEntity);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		PagesController.mainPage();
+		renderText("success");
 	}
 
     public static void logout() {
