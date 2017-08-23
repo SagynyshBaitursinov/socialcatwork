@@ -9,10 +9,6 @@
     <link rel="stylesheet" type="text/css" href="/public/stylesheets/normalize.css">
     <link rel="stylesheet" type="text/css" href="/public/stylesheets/test.css">
 
-
-    <script src="https://use.fontawesome.com/a12d590683.js"></script>
-	<script src="/public/javascripts/jquery-1.6.4.min.js"></script>
-
 </head>
 <body>
 <header>
@@ -27,17 +23,6 @@
 </header>
 <!--<h4>Here are some recent cat photos:</h4>-->
 
-<script>
-    $( ".fa-caret-right" ).click(function() {
-        //alert($( this ).css( "transform" ));
-        if (  $( this ).css( "transform" ) == 'none' ){
-            $(this).css("transform","rotate(90deg)");
-        } else {
-            $(this).css("transform","" );
-        }
-    });
-</script>
-
 <div id="offset"></div>
 
 #{list items:allPhotoEntities, as:'photo'}
@@ -50,38 +35,63 @@
 
 
     <div>
-        <img id="cat_img" src="@{PhotoController.getPhoto}?id=${photo.getId()}"/>
+        <img src="@{PhotoController.getPhoto}?id=${photo.getId()}"/>
 
         <div class="com">
-            <form class="comment" action="@{Application.saveComment}?photo=${photo.getId()}" method="POST" accept-charset="UTF-8">
-                <input class="comment_on_enter" type="text" name="comment" placeholder="Your comment"/> <br/>
-                <!-- <input type="submit" value="Comment"> -->
-            </form>
+            <input class="comment_on_enter" type="text" id="${photo.getId()}" placeholder="Your comment"/> <br/>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function() {
-
-        $('.comment_on_enter').keydown(function(event) {
-        // enter has keyCode = 13, change it if you want to use another button
-             if (event.keyCode == 13) {
-                 this.form.submit();
-                 return false;
-                }
-            });
-        });
-    </script>
-
-    <div class="all_comments">
+    <div class="all_comments" id="div-${photo.getId()}">
         #{list items:photo.getComments(), as:'comment'}
             <p style="color:#404349;"> ${comment.getComment()} </p>
         #{/list}
     </div>
-
 </div>
 
 #{/list}
+
+<script src="https://use.fontawesome.com/a12d590683.js"></script>
+<script src="/public/javascripts/jquery-1.6.4.min.js"></script>
+
+<script>
+    $( ".fa-caret-right" ).click(function() {
+        //alert($( this ).css( "transform" ));
+        if (  $( this ).css( "transform" ) == 'none' ){
+            $(this).css("transform","rotate(90deg)");
+        } else {
+            $(this).css("transform","" );
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+
+        $('.comment_on_enter').keydown(function(event) {
+            // enter has keyCode = 13, change it if you want to use another button
+            if (event.keyCode == 13) {
+                var comment = this.value;
+                var id = this.id;
+
+                $.ajax({
+                    url: "/application/savecomment",
+                    type: "POST",
+                    data: "comment=" + encodeURIComponent(comment) + "&photo=" + id,
+                    contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+                    dataType: "text"
+                }).done(function(data) {
+                    if (data == "success") {
+                        var newComment = "<p style=\"color:#404349;\">" + comment + "</p>";
+                        $("#div-" + id).append(newComment);
+                        $("#div-" + id).scrollTop($("#div-" + id)[0].scrollHeight);
+                    }
+                }).fail(function(data) {
+                    console.log("not saved");
+                });
+            }
+        });
+    });
+</script>
 
 </body>
 </html>
